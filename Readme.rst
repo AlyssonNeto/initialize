@@ -1,1 +1,4 @@
-A project creator for python, html, css, javascript, php
+Initialize
+==========
+
+A Template Project Creator for python, html, css, Javascript, php
