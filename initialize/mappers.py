@@ -49,5 +49,32 @@ PYTHON_PROJ = ['setup.py',
 			   {'tests':[]},
 			   {'docs':[]}]
 
+# Html Css Javascript Template
+HTCSJS = ['Authors.txt',
+		  'Contributing.md',
+		  'License',
+		  '.editorconfig',
+		  {'dist':['index.html',
+		  		   {'css':['index.css']},
+		  		   {'js' :['index.js']}
+		  		  ]},
+		  {'build':[{'release':[]}]},
+		  {'src':[]},
+		  {'tests': []}
+		 ]
 
+# Standard Javascript Library
+JSLIB =['Authors.txt',
+		  'Contributing.md',
+		  'License',
+		  '.editorconfig',
+		  {'dist':[]},
+		  {'build':[{'release':[]}]},
+		  {'src':[]},
+		  {'tests': []}]
 
+# Simple Html CSS JavaScript
+
+SHTML = ['inxex.html',
+		 {'css':['index.css']},
+		 {'js':['index.js']}]
