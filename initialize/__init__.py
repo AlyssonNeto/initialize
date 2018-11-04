@@ -1,20 +1,18 @@
 #! /usr/bin/python3
 
 import sys
+import os
 from sys import argv
 from os.path import join
 from os import getcwd
 from sys import path
-from initialize.utils import InvalidTrigger
+from subprocess import call
+from initialize.utils import InvalidTrigger, printusage
 from initialize.triggers import Trigger
-from initialize.mappers import PYTHON_PROJ, WORDPRESS_THEME, HTCSJS, JSLIB, SHTML
-
-
-# Main Path is
-main_path = getcwd()
-
+from initialize.mappers import (PYTHON_PROJ, WORDPRESS_THEME, HTCSJS, JSLIB, SHTML,
+								WORDPRESS_PLUGIN)
 # main options
-standard_main_options = ['javascript', 'python' , 'html', 'ws_theme']
+standard_main_options = ['javascript', 'python' , 'html', 'ws_theme', 'shtml']
 standard_sub_options = ['-q']
 
 # Adding Specific triggers
@@ -30,36 +28,86 @@ def createworkingenviornment():
 	other functions to work
 	"""
 	if len(argv) > 1:
-		pass
+		option = argv[-1]
+		customizations = argv[1: -1]
+
+		if option not in standard_main_options:
+			printusage()
+			return
+
+		for customization in customizations:
+			if customization not in standard_sub_options:
+				print(customization + " option does not exist")
+				printusage()
+				return
+
+		project_name = input('Enter Project Name :')
+		readme = input('Enter Readme Text Please: \n')
+
+		enviornment = dict(option = option,
+						   customizations = customizations,
+						   project_name = project_name,
+						   readme_text = readme)
+		main(enviornment)
+
 	else:
-		print("\n\n"
-			"usage initialize [options] category\n"
-			"options:\n"
-			"q : for quite \n"
-			"\n"
-			"category:\n"
-			"javascript: for javascript standard libray structure\n"
-			"python: for python standard libray structure\n"
-			"html: for html standard libray structure\n"
-			"ws_theme: for standard ws_theme structure\n")
+		printusage()
 		return
 
+def main(enviornment):
+	# use to take enviornment
 
 
+	# Main Path is
+	main_path = join(getcwd(),enviornment['project_name'])
+	option = enviornment['option']
+	tasks = {'javascript': JSLIB ,
+			 'python': PYTHON_PROJ ,
+			 'html' : HTCSJS,
+			 'ws_theme' : WORDPRESS_THEME ,
+			 'shtml': SHTML
+			 }
+	_create_files(main_path, tasks[option])
 
 
-def create_files_and_folder():
+def _create_files(working_path, files_to_create):
 	"""
-	This is used to create Files and Folder
-	for package directory
+	directory structrue is structure in form of
+	"""
+	if not os.path.exists(working_path):
+		os.makedirs(working_path)
+
+	for file in files_to_create:
+		if isinstance(file, dict):
+			_callback(working_path, file)
+		else:
+			_createfile(working_path, file)
+
+def _dct(dictionary):
+	for name, value in dictionary.items():
+		return (name, value)
+
+
+def _createfile(file_path,file):
+	file_path = join(file_path, file)
+	open(file_path, 'w').close()
+
+def _callback(current_path,dictionary):
+	"""
+	Used to callback create_files_in_dict folder
+	"""
+	working_path, files = _dct(dictionary)
+	working_path = join(current_path, working_path)
+	_create_files(working_path, files)
+
+def printmessage(message, customizations):
+	"""
+	Used to print Message to console
 	"""
 	pass
 
-def _append_path():
+def write_readme_text():
 	"""
-	This is used to append path to the working
-	directory and create files and folder
+	This is used to write Readme Text
 	"""
 	pass
-
-
