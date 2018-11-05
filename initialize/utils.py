@@ -21,3 +21,12 @@ def printusage():
 			"	python: for python standard libray structure\n"
 			"	html: for html standard libray structure\n"
 			"	ws_theme: for standard ws_theme structure\n")
+
+def printmessage(message, customizations):
+	"""
+	Used to print Message to console
+	"""
+	if '-q' in customizations['customizations']:
+		pass
+	else:
+		print(message)
