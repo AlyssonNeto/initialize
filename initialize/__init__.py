@@ -12,15 +12,8 @@ from initialize.triggers import Trigger
 from initialize.mappers import (PYTHON_PROJ, WORDPRESS_THEME, HTCSJS, JSLIB, SHTML,
 								WORDPRESS_PLUGIN)
 # main options
-standard_main_options = ['javascript', 'python' , 'html', 'ws_theme', 'shtml']
+standard_main_options = ['javascript', 'python' , 'html', 'ws_theme', 'shtml', 'wp_plugin']
 standard_sub_options = ['-q']
-
-# Adding Specific triggers
-javascript = Trigger('javascript')
-python = Trigger('python')
-html = Trigger('html')
-ws_theme = Trigger('ws_theme')
-
 
 def createworkingenviornment():
 	"""
@@ -64,13 +57,16 @@ def main(enviornment):
 	tasks = {'javascript': JSLIB ,
 			 'python': PYTHON_PROJ ,
 			 'html' : HTCSJS,
-			 'ws_theme' : WORDPRESS_THEME ,
-			 'shtml': SHTML
+			 'wp_theme' : WORDPRESS_THEME ,
+			 'shtml': SHTML,
+			 'wp_plugin': WORDPRESS_PLUGIN
 			 }
-	_create_files(main_path, tasks[option])
+	enviornment['main_path'] = main_path
+	enviornment['tasks'] = tasks
+	_create_files(main_path, tasks[option],enviornment)
 
 
-def _create_files(working_path, files_to_create):
+def _create_files(working_path, files_to_create,enviornment):
 	"""
 	directory structrue is structure in form of
 	"""
@@ -79,8 +75,9 @@ def _create_files(working_path, files_to_create):
 
 	for file in files_to_create:
 		if isinstance(file, dict):
-			_callback(working_path, file)
+			_callback(working_path, file, enviornment)
 		else:
+			printmessage("Creating File: " + file, enviornment)
 			_createfile(working_path, file)
 
 def _dct(dictionary):
@@ -92,22 +89,33 @@ def _createfile(file_path,file):
 	file_path = join(file_path, file)
 	open(file_path, 'w').close()
 
-def _callback(current_path,dictionary):
+def _callback(current_path, dictionary, enviornment):
 	"""
 	Used to callback create_files_in_dict folder
 	"""
 	working_path, files = _dct(dictionary)
 	working_path = join(current_path, working_path)
-	_create_files(working_path, files)
+	printmessage("Going Inside Directory: " + working_path.split('/')[-1], enviornment)
+	_create_files(working_path, files, enviornment)
 
 def printmessage(message, customizations):
 	"""
 	Used to print Message to console
 	"""
-	pass
+	if '-q' in customizations['customizations']:
+		pass
+	else:
+		print(message)
 
 def write_readme_text():
 	"""
 	This is used to write Readme Text
+	"""
+	pass
+
+def print_tree():
+	"""
+	This is used to print tree preview of directory structure
+	inside command line terminal
 	"""
 	pass

@@ -21,3 +21,9 @@ class Trigger(object):
 
 		self._triggers.append(trigger)
 
+javascript 	= Trigger('javascript')
+python 		= Trigger('python')
+html 		= Trigger('html')
+shtml 		= Trigger('shtml')
+wp_theme 	= Trigger('wp_theme')
+wp_plugin 	= Trigger('wp_plugin')
