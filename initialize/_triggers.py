@@ -13,12 +13,6 @@ def setup_py(environment):
 	"""
 	pass
 
-def mainfest_py(environment):
-	"""
-	Creating Custom Hook For Mainfest File
-	"""
-	pass
-
 def gitignore_py(environment):
 	"""
 	Hook for gitignore File
