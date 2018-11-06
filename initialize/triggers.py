@@ -3,6 +3,7 @@ from initialize.utils import InvalidTrigger, _input
 from initialize.mappers import (PYTHON_PROJ, WORDPRESS_THEME, HTCSJS, JSLIB, SHTML,
 								WORDPRESS_PLUGIN)
 from datetime import datetime
+from initialize._triggers import readme_py, setup_py,
 
 class Trigger(object):
 	"""
@@ -24,7 +25,7 @@ class Trigger(object):
 		year = _input("Enter Year", default=datetime.now().year)
 		author = _input("Enter Author Of Repo", allow_none = False)
 		quick_description = _input("Small Description")
-
+		version = _input("Enter Version", default = '0.1.0')
 
 
 		if enviornment['option'] == 'wp_theme':
@@ -32,10 +33,14 @@ class Trigger(object):
 
 		if enviornment['option'] == 'python':
 			# getting if Python enviornment is set
-			tox = None
-			travis = None
-			# setup.py
-			# setup.cfg
+			packages = _input("Enter Packages", default=enviornment['project_name'])
+			enviornment['packages'] = [package.strip() for package in packages.split(',')]
+
+		enviornment['license'] = license
+		enviornment['year'] = year
+		enviornment['author'] = author
+		enviornment['desc'] = quick_description
+		enviornment['version'] = version
 
 
 	def add_trigger(self, name, trigger):
