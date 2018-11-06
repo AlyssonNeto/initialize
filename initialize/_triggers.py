@@ -25,31 +25,12 @@ def gitignore_py(environment):
 	"""
 	pass
 
-def travis(enviornment):
-	"""
-	Hook for Travis
-	"""
-	pass
-
-def appover(enviornment):
-	"""
-	Hook for appover
-	"""
-	pass
-
-
-
 def setup_cfg(enviornment):
 	"""
 	setup configuration file
 	"""
 	pass
 
-def tox(enviornment):
-	"""
-	Tox configuration file
-	"""
-	pass
 
 # Html Css Javascript Configurations
 
