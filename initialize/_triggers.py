@@ -25,13 +25,6 @@ def gitignore_py(environment):
 	"""
 	pass
 
-def setup_cfg(enviornment):
-	"""
-	setup configuration file
-	"""
-	pass
-
-
 # Html Css Javascript Configurations
 
 def _htcsjs_readme(enviornment):
