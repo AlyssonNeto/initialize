@@ -31,6 +31,7 @@ WORDPRESS_THEME = [{'assets':[{'css': []},
 					'searchform.php',
 					'sidebar.php',
 					'single.php',
+					'License',
 					'style.css']
 
 
@@ -40,10 +41,12 @@ WORDPRESS_THEME = [{'assets':[{'css': []},
 PYTHON_PROJ = ['setup.py',
 			   'setup.cfg',
 			   'tox.ini',
+			   '.travis.yml',
 			   '.gitattributes',
 			   '.gitignore',
 			   'Authors',
 			   'Contributing',
+			   'Readme.rst',
 			   {'{0}':['_compat.py']},
 			   'License',
 			   {'tests':[]},
@@ -78,11 +81,14 @@ JSLIB =['Authors.txt',
 # Simple Html CSS JavaScript
 
 SHTML = ['inxex.html',
+		 'Readme',
+		 'License',
 		 {'css':['index.css']},
 		 {'js':['index.js']}]
 
-WORDPRESS_PLUGIN = ['plugin-name.php',
+WORDPRESS_PLUGIN = ['{0}.php',
 					'uninstall.php',
+					'License',
 					{'languages': [] },
 					{'includes':[]},
 					{'admin':[{'js':[]},

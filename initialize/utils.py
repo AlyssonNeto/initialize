@@ -30,3 +30,31 @@ def printmessage(message, customizations):
 		pass
 	else:
 		print(message)
+
+def create_badges_table():
+	"""
+	This Function is used to create Badges Table inside
+	Readme
+	"""
+	pass
+
+def _input(message, allow_none = True, default = None):
+	"""
+	This is used to take input
+	"""
+	message = _prepare_input(message, default)
+	while True:
+		value = input(message)
+		if default is None and not allow_none and value == '':
+			print("Value Required")
+		elif default is not None and value == '' and allow_none:
+			return value
+
+def _prepare_input(message, default = None):
+	"""
+	Used to prepare input string
+	"""
+	if default is not None:
+		message = message + ' [' + default + ']: '
+		return message
+	return message

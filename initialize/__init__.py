@@ -7,7 +7,7 @@ from os.path import join
 from os import getcwd
 from sys import path
 from subprocess import call
-from initialize.utils import InvalidTrigger, printusage
+from initialize.utils import InvalidTrigger, printusage, printmessage
 from initialize.triggers import Trigger
 from initialize.mappers import (PYTHON_PROJ, WORDPRESS_THEME, HTCSJS, JSLIB, SHTML,
 								WORDPRESS_PLUGIN)
@@ -97,15 +97,6 @@ def _callback(current_path, dictionary, enviornment):
 	working_path = join(current_path, working_path)
 	printmessage("Going Inside Directory: " + working_path.split('/')[-1], enviornment)
 	_create_files(working_path, files, enviornment)
-
-def printmessage(message, customizations):
-	"""
-	Used to print Message to console
-	"""
-	if '-q' in customizations['customizations']:
-		pass
-	else:
-		print(message)
 
 def write_readme_text():
 	"""
