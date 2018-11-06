@@ -21,12 +21,6 @@ def gitignore_py(environment):
 
 # Html Css Javascript Configurations
 
-def _htcsjs_readme(enviornment):
-	"""
-	Configuration For Readme
-	"""
-	pass
-
 def _index_html(enviornment):
 	"""
 	Create Index.html File
