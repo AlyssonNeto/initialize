@@ -1,5 +1,5 @@
 #! /usr/bin/python3
-from initialize.utils import InvalidTrigger, _input
+from initialize.utils import InvalidTrigger, _input, get_github_link
 from initialize.mappers import (PYTHON_PROJ, WORDPRESS_THEME, HTCSJS, JSLIB, SHTML,
 								WORDPRESS_PLUGIN)
 from datetime import datetime
@@ -37,6 +37,13 @@ class Trigger(object):
 		author = _input("Enter Author Of Repo", allow_none = False)
 		quick_description = _input("Small Description")
 		version = _input("Enter Version", default = '0.1.0')
+		github_repo = _input("Enter Github Repository Name",
+							default = enviornment['project_name'])
+		github_profile_name = _input("Enter Profile Name",
+									  default = author)
+		author_url = _input("Author Url", default = get_github_link(github_profile_name, github_repo))
+
+
 
 
 		if enviornment['option'] == 'wp_theme':
@@ -49,6 +56,9 @@ class Trigger(object):
 		enviornment['author'] = author
 		enviornment['desc'] = quick_description
 		enviornment['version'] = version
+		enviornment['author_url'] = author_url
+		enviornment['github_repo'] = github_repo
+		enviornment['github_link'] = get_github_link(github_profile_name, github_repo)
 
 
 	def add_trigger(self, name, trigger):
@@ -60,6 +70,7 @@ class Trigger(object):
 								 " Trigger Should Be Callable")
 		self._triggers[name] = trigger
 
+
 	def add_filter(self, name, trigger):
 		"""
 		This is used to add trigger to cetogery
@@ -69,19 +80,22 @@ class Trigger(object):
 								 " Trigger Should Be Callable")
 		self._filters[name] = trigger
 
+
 	def process_trigger(self, working_path, trigger, enviornment):
 		"""
 		This is used to
 		"""
 		if trigger in self._triggers:
-			self._triggers[name]();
+			self._triggers[trigger](working_path, trigger, enviornment);
+
 
 	def process_filter(self, name):
 		"""
 		This is used to
 		"""
-		if name in self._triggers:
+		if name in self._filters:
 			self._filters[name]();
+
 
 	def remove_trigger(self, name):
 		"""
