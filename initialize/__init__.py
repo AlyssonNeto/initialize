@@ -7,7 +7,7 @@ from os.path import join
 from os import getcwd
 from sys import path
 from subprocess import call
-from initialize.utils import InvalidTrigger, printusage, printmessage
+from initialize.utils import InvalidTrigger, printusage, printmessage, _input
 from initialize.triggers import Trigger, HeadshorTriggers
 from initialize.mappers import (PYTHON_PROJ, WORDPRESS_THEME, HTCSJS, JSLIB, SHTML,
 								WORDPRESS_PLUGIN)
@@ -34,8 +34,8 @@ def createworkingenviornment():
 				printusage()
 				return
 
-		project_name = input('Enter Project Name :')
-		readme = input('Enter Readme Text Please: \n')
+		project_name = _input('Enter Project Name', allow_none = False)
+		readme = _input('Enter Readme Text Please', allow_none = False)
 
 		enviornment = dict(option = option,
 						   customizations = customizations,
@@ -80,7 +80,7 @@ def _create_files(working_path, files_to_create,enviornment):
 		else:
 			printmessage("Creating File: " + file, enviornment)
 			# Processing With Filters
-			HeadshorTriggers[enviornment['option']].process_filter(file)
+			# HeadshorTriggers[enviornment['option']].process_filter(file)
 			_createfile(working_path, file)
 			HeadshorTriggers[enviornment['option']].process_trigger(working_path, file, enviornment)
 
@@ -101,5 +101,3 @@ def _callback(current_path, dictionary, enviornment):
 	working_path = join(current_path, working_path)
 	printmessage("Going Inside Directory: " + working_path.split('/')[-1], enviornment)
 	_create_files(working_path, files, enviornment)
-
-
