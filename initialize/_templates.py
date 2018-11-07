@@ -38,21 +38,24 @@ Or install the latest build from an `archive`_. ::
     pip install -U {github_link}/tarball/master
 
 .. _GitHub: {github_link}
-.. _archive: {github_link}/archive/master.tar.gz"""
+.. _archive: {github_link}/archive/master.tar.gz
+
+
+"""
 
 
 
 Contributing = """Contributing
 =============
 
-One Can Contribute to this project by **creating a issue at issue** at `https://github.com/{owner}/{repo}` Or **creating a pull request**
+One Can Contribute to this project by **creating a issue at issue** at `{github_link}` Or **creating a pull request**
 
 Pull Request Process
 --------------------
 
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a
    build.
-2. Checkout pull requests list at `https://github.com/{owner}/{repo}/pulls` to ensure that you are not dublicating anybody's work
+2. Checkout pull requests list at `{github_link}/pulls` to ensure that you are not dublicating anybody's work
 3. Update the README.md with details of changes to the interface, this includes new environment
    variables, exposed ports, useful file locations and container parameters.
 4. Increase the version numbers in any examples files and the README.md to the new version that this
@@ -108,7 +111,7 @@ INDEX_HTML = """<!DOCTYPE html>
 # here when found
 
 
-GITIGNORE = """# http://EditorConfig.org
+EditorConfig = """# http://EditorConfig.org
 
 #################
 # Common Settings
