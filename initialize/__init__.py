@@ -8,7 +8,7 @@ from os import getcwd
 from sys import path
 from subprocess import call
 from initialize.utils import InvalidTrigger, printusage, printmessage
-from initialize.triggers import Trigger
+from initialize.triggers import Trigger, HeadshorTriggers
 from initialize.mappers import (PYTHON_PROJ, WORDPRESS_THEME, HTCSJS, JSLIB, SHTML,
 								WORDPRESS_PLUGIN)
 # main options
@@ -41,6 +41,7 @@ def createworkingenviornment():
 						   customizations = customizations,
 						   project_name = project_name,
 						   readme_text = readme)
+		HeadshorTriggers[enviornment['option']].clis(enviornment)
 		main(enviornment)
 
 	else:
@@ -78,7 +79,10 @@ def _create_files(working_path, files_to_create,enviornment):
 			_callback(working_path, file, enviornment)
 		else:
 			printmessage("Creating File: " + file, enviornment)
+			# Processing With Filters
+			HeadshorTriggers[enviornment['option']].process_filter(file)
 			_createfile(working_path, file)
+			HeadshorTriggers[enviornment['option']].process_trigger(working_path, file, enviornment)
 
 def _dct(dictionary):
 	for name, value in dictionary.items():
@@ -98,15 +102,4 @@ def _callback(current_path, dictionary, enviornment):
 	printmessage("Going Inside Directory: " + working_path.split('/')[-1], enviornment)
 	_create_files(working_path, files, enviornment)
 
-def write_readme_text():
-	"""
-	This is used to write Readme Text
-	"""
-	pass
 
-def print_tree():
-	"""
-	This is used to print tree preview of directory structure
-	inside command line terminal
-	"""
-	pass
