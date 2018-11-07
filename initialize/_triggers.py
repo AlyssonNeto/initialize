@@ -1,11 +1,24 @@
 # Creating Custom Functions to to Add it To Hook
 # Python Specific
 
-def readme_py(working_path, file, environment):
+import os
+from initialize.utils import write_to_file, get_github_link
+from initialize._templates import PYTHON_INSTALLATION, Contributing
+
+def readme_py(working_path, file, environment, storage = ''):
 	"""
 	Hook For Readme
 	"""
-	pass
+	_storage = storage
+	github_link = environment['github_link']
+	package_name = environment['github_repo']
+	_storage = _storage + PYTHON_INSTALLATION.format(package_name = environment['project_name'],
+													github_link = environment['github_link'],
+													git_folder = environment['project_name'])
+	readme(working_path, file, environment, _storage)
+
+
+
 
 def setup_py(working_path, file, environment):
 	"""
@@ -23,18 +36,22 @@ def gitignore_py(working_path, file, environment):
 
 def _index_html(working_path, file, environment):
 	"""
-	Create Index.html File
+	Index.html
 	"""
 	pass
 
 
 # General Formatting Hooks
 
-def readme(working_path, file, environment):
+def readme(working_path, file, environment, storage):
 	"""
 	This is used to create simple readme file
 	"""
-	pass
+	_storage = storage
+	Contrib = Contributing.format(github_link = environment['github_link'])
+	_storage = _storage + Contrib
+	write_to_file(working_path, file, environment ,_storage)
+
 
 def license(working_path, file, environment):
 	"""
