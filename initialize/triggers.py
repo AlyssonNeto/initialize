@@ -3,7 +3,8 @@ from initialize.utils import InvalidTrigger, _input
 from initialize.mappers import (PYTHON_PROJ, WORDPRESS_THEME, HTCSJS, JSLIB, SHTML,
 								WORDPRESS_PLUGIN)
 from datetime import datetime
-from initialize._triggers import readme_py, setup_py,
+from initialize._triggers import (readme_py, setup_py, gitignore_py, _index_html, readme,
+								  license, project_format, authors, editor_config)
 
 class Trigger(object):
 	"""
@@ -15,6 +16,16 @@ class Trigger(object):
 		self.category = category
 		self._triggers = {}
 		self._filters= {}
+
+		# Adding Custom Triggers Here
+		self.add_trigger('License', license)
+		self.add_trigger('Authors', authors)
+		self.add_trigger('.editorconfig', editor_config)
+		self.add_trigger('Readme.md', readme)
+
+		# Adding custom filters
+		# A difference between filters they run on data not on enviornment
+		self.add_filter('format', project_format)
 
 	@staticmethod
 	def clis(enviornment):
@@ -30,12 +41,9 @@ class Trigger(object):
 
 		if enviornment['option'] == 'wp_theme':
 			# enviornment related to ws_theme
+			pass
 
-		if enviornment['option'] == 'python':
-			# getting if Python enviornment is set
-			packages = _input("Enter Packages", default=enviornment['project_name'])
-			enviornment['packages'] = [package.strip() for package in packages.split(',')]
-
+		# Adding Enviornment
 		enviornment['license'] = license
 		enviornment['year'] = year
 		enviornment['author'] = author
@@ -61,19 +69,12 @@ class Trigger(object):
 								 " Trigger Should Be Callable")
 		self._filters[name] = trigger
 
-	def process_trigger(self, name):
+	def process_trigger(self, working_path, trigger, enviornment):
 		"""
 		This is used to
 		"""
-		if name in self._triggers:
+		if trigger in self._triggers:
 			self._triggers[name]();
-
-	def process_env(self, name):
-		"""
-		This is used to
-		"""
-		if name in self._triggers:
-			self._env[name]();
 
 	def process_filter(self, name):
 		"""
@@ -88,6 +89,7 @@ class Trigger(object):
 		"""
 		self._triggers.pop(name,None)
 
+
 class JavascriptTrigger(Trigger):
 	"""
 	Triggers For javascript
@@ -95,22 +97,55 @@ class JavascriptTrigger(Trigger):
 	def __init__(self, category):
 		super(JavascriptTrigger, self).__init__(category)
 
+
+class Shtml(Trigger):
+	"""A Simple Class Representing A shtml Trigger"""
+	def __init__(self, category):
+		super(Shtml, self).__init__(category)
+		self.add_trigger('index_html', _index_html)
+
+
+class Python(Trigger):
+	"""A Python Project Accumulator"""
+	def __init__(self, category):
+		super(Python, self).__init__(category)
+
+		# Adding A Custom Python Triggers
+		self.add_trigger('Readme.rst', readme_py)
+		self.add_trigger('setup.py', setup_py)
+		self.add_trigger('.gitignore', gitignore_py)
+
 	@staticmethod
 	def clis(enviornment):
-		"""
-		Adds Enviornment Variables
-		"""
-		pass
+		""" A cli enviornment Attachment"""
+		Trigger.clis(enviornment)
+		packages = _input("Enter Packages", default=enviornment['project_name'])
+		enviornment['packages'] = [package.strip() for package in packages.split(',')]
 
 
+class Wp_Theme(Trigger):
+	"""A Wordpress Theme Trigger Accumulator"""
+	def __init__(self, category):
+		super(Wp_Theme, self).__init__(category)
+
+	@staticmethod
+	def clis(enviornment):
+		""" A cli enviornment Attachment"""
+		Trigger.clis(enviornment)
 
 
-javascript 	= Trigger('javascript')
-python 		= Trigger('python')
+javascript 	= JavascriptTrigger('javascript')
+python 		= Python('python')
 html 		= Trigger('html')
-shtml 		= Trigger('shtml')
-wp_theme 	= Trigger('wp_theme')
+shtml 		= Shtml('shtml')
+wp_theme 	= Wp_Theme('wp_theme')
 wp_plugin 	= Trigger('wp_plugin')
 
 
-
+HeadshorTriggers = {'javascript': javascript ,
+			 'python': python ,
+			 'html' : html,
+			 'wp_theme' : wp_theme ,
+			 'shtml': shtml,
+			 'wp_plugin': wp_plugin
+			 }
