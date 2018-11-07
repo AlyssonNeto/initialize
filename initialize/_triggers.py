@@ -1,19 +1,19 @@
 # Creating Custom Functions to to Add it To Hook
 # Python Specific
 
-def readme_py(environment):
+def readme_py(working_path, file, environment):
 	"""
 	Hook For Readme
 	"""
 	pass
 
-def setup_py(environment):
+def setup_py(working_path, file, environment):
 	"""
 	Creating Custom Triggers For Setup.py file python
 	"""
 	pass
 
-def gitignore_py(environment):
+def gitignore_py(working_path, file, environment):
 	"""
 	Hook for gitignore File
 	"""
@@ -21,7 +21,7 @@ def gitignore_py(environment):
 
 # Html Css Javascript Configurations
 
-def _index_html(enviornment):
+def _index_html(working_path, file, environment):
 	"""
 	Create Index.html File
 	"""
@@ -30,31 +30,31 @@ def _index_html(enviornment):
 
 # General Formatting Hooks
 
-def readme(enviornment):
+def readme(working_path, file, environment):
 	"""
 	This is used to create simple readme file
 	"""
 	pass
 
-def license(enviornment):
+def license(working_path, file, environment):
 	"""
 	Hook for license
 	"""
 	pass
 
-def project_format(enviornment):
+def project_format(working_path, file, environment):
 	"""
 	Project Naming Formatter
 	"""
 	pass
 
-def authors(enviornment):
+def authors(working_path, file, environment):
 	"""
 	Hook For authors
 	"""
 	pass
 
-def editor_config(enviornment):
+def editor_config(working_path, file, environment):
 	"""
 	For Editor Config Hook
 	"""
