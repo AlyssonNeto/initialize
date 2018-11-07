@@ -2,6 +2,7 @@
 
 
 # Predefined Errors
+import os
 
 class InvalidTrigger(ValueError):
 	"""
@@ -68,13 +69,18 @@ def _prepare_input(message, default = None):
 	return message + ' : '
 
 
-def write_to_file(file, content):
-    """Summary
-
-    Args:
-        file (TYPE): Description
-        content (TYPE): Description
+def write_to_file(working_path, file, environment ,content):
     """
-    with open(file, 'w') as f:
-    	f.write(content)
+    Summary
+    """
+    path = os.path.join(working_path,file)
+    if os.path.exists(path):
+    	with open(path, 'w') as f:
+    		f.write(content)
+
+def get_github_link(owner, repo):
+	"""
+	This will be used to get gitub link
+	"""
+	return 'https://github.com/{owner}/{repo}'.format(owner = owner,repo = repo)
 
