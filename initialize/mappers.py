@@ -24,7 +24,7 @@ WORDPRESS_THEME = [{'assets':[{'css': []},
 					'header.php',
 					'index.php',
 					'page.php',
-					'Readme.txt',
+					'Readme.md',
 					'rtl.css',
 					'screenshot.png',
 					'search.php',
@@ -53,7 +53,7 @@ PYTHON_PROJ = ['setup.py',
 			   {'docs':[]}]
 
 # Html Css Javascript Template
-HTCSJS = ['Authors.txt',
+HTCSJS = ['Authors',
 		  'Contributing.md',
 		  'License',
 		  '.editorconfig',
@@ -68,7 +68,7 @@ HTCSJS = ['Authors.txt',
 		 ]
 
 # Standard Javascript Library
-JSLIB =['Authors.txt',
+JSLIB =['Authors',
 		  'Contributing.md',
 		  'License',
 		  '.editorconfig',
@@ -81,7 +81,7 @@ JSLIB =['Authors.txt',
 # Simple Html CSS JavaScript
 
 SHTML = ['inxex.html',
-		 'Readme',
+		 'Readme.md',
 		 'License',
 		 {'css':['index.css']},
 		 {'js':['index.js']}]
@@ -89,6 +89,7 @@ SHTML = ['inxex.html',
 WORDPRESS_PLUGIN = ['{0}.php',
 					'uninstall.php',
 					'License',
+					'Authors',
 					{'languages': [] },
 					{'includes':[]},
 					{'admin':[{'js':[]},
