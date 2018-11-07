@@ -10,6 +10,7 @@ class InvalidTrigger(ValueError):
 	def __init__(self, msg):
 		super(InvalidTrigger,self).__init__(msg)
 
+
 def printusage():
 	print("\n"
 			"usage: initialize [options] category\n\n"
@@ -22,6 +23,7 @@ def printusage():
 			"	html: for html standard libray structure\n"
 			"	ws_theme: for standard ws_theme structure\n")
 
+
 def printmessage(message, customizations):
 	"""
 	Used to print Message to console
@@ -31,12 +33,14 @@ def printmessage(message, customizations):
 	else:
 		print(message)
 
+
 def create_badges_table():
 	"""
 	This Function is used to create Badges Table inside
 	Readme
 	"""
 	pass
+
 
 def _input(message, allow_none = True, default = None):
 	"""
@@ -53,6 +57,7 @@ def _input(message, allow_none = True, default = None):
 		else:
 			return value
 
+
 def _prepare_input(message, default = None):
 	"""
 	Used to prepare input string
@@ -61,6 +66,7 @@ def _prepare_input(message, default = None):
 		message = message + ' [' + str(default) + ']: '
 		return message
 	return message + ' : '
+
 
 def write_to_file(file, content):
     """Summary
