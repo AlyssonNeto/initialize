@@ -45,9 +45,12 @@ def _input(message, allow_none = True, default = None):
 	message = _prepare_input(message, default)
 	while True:
 		value = input(message)
-		if default is None and not allow_none and value == '':
+		if allow_none and value == '' and default is not None:
+			return default
+		elif not allow_none and value == '':
 			print("Value Required")
-		elif default is not None and value == '' and allow_none:
+			pass
+		else:
 			return value
 
 def _prepare_input(message, default = None):
@@ -55,6 +58,17 @@ def _prepare_input(message, default = None):
 	Used to prepare input string
 	"""
 	if default is not None:
-		message = message + ' [' + default + ']: '
+		message = message + ' [' + str(default) + ']: '
 		return message
-	return message
+	return message + ' : '
+
+def write_to_file(file, content):
+    """Summary
+
+    Args:
+        file (TYPE): Description
+        content (TYPE): Description
+    """
+    with open(file, 'w') as f:
+    	f.write(content)
+
