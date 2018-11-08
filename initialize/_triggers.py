@@ -4,7 +4,7 @@
 import os
 from initialize.utils import write_to_file, get_github_link
 from initialize._templates import (PYTHON_INSTALLATION, Contributing,
-	GITIGNORE_PY, INDEX_HTML, EditorConfig)
+	GITIGNORE_PY, INDEX_HTML, EditorConfig, SETUP_PY)
 from initialize._license_template import license_arr, license_dct
 
 
@@ -25,7 +25,22 @@ def setup_py(working_path, file, environment):
 	"""
 	Creating Custom Triggers For Setup.py file python
 	"""
-	pass
+	try:
+		license_int = int(environment['license'])
+	except ValueError:
+		license_int = 0
+
+	content = SETUP_PY.format(project_name=environment['project_name'],
+							  version=environment['version'] ,
+							  package_name=environment['project_name'],
+							  project_url=environment['github_link'],
+							  license=license_arr[license_int],
+							  author=environment['author'],
+							  author_email='',
+							  description=environment['desc'])
+
+	write_to_file(working_path, file, environment, content)
+
 
 
 def gitignore_py(working_path, file, environment):

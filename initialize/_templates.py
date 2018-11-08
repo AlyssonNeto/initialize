@@ -289,14 +289,14 @@ dmypy.json
 SETUP_PY = """from setuptools import setup
 
 setup(
-    name={project_name},
-    version={version},
-    packages=[{package_name}],
-    url={project_url},
-    license={license},
-    author={author},
-    author_email={author_email},
-    description={description}
+    name='{project_name}',
+    version='{version}',
+    packages=['{package_name}'],
+    url='{project_url}',
+    license='{license}',
+    author='{author}',
+    author_email='{author_email}',
+    description='{description}'
 )"""
 
 
