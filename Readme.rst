@@ -2,7 +2,7 @@
 
     <h1 style="text-align:center; text-decoration:underline;color:green"> Initialize </h1>
 
-A Template Project Creator for python, html, css, Javascript, Wordpress Plugin, Wordpress Theme
+A Template Project Creator for python, html, css, Javascript, Wordpress Plugin, Wordpress Theme 
 
 Benifits
 --------
