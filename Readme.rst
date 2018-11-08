@@ -8,9 +8,9 @@ Benifits
 --------
 
 * Auto Creation Of Standard Document Structure
-* Pre Initialised Git Repository
-* Addition of Remote Repository After initialization
-* Additon Of Tags From 0.1.0
+* Pre Initialised Git Repository(Not Implemented Yet)
+* Addition of Remote Repository After initialization(Not Added Yet)
+* Additon Of Tags From 0.1.0(Not Added Yet)
 * A Hour Start
   
 Installation
@@ -35,7 +35,7 @@ The latest code is available from `GitHub`_. Clone the repository then install
 using pip. ::
 
     git clone https://github.com/AngrySoilder/initialize
-    pip install -e .initialize
+    pip install -e ./initialize
 
 Or install the latest build from an `archive`_. ::
 
