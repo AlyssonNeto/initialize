@@ -88,9 +88,11 @@ Development Process
 * Create a coverage report
 * Pull...
   
-Todo:
+Todo
+----
 
  * A Wordpress Theme Support 
+ * A Wordpress Plugin Support
 
 How To issue
 ------------
