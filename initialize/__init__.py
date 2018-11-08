@@ -18,7 +18,7 @@ standard_sub_options = ['-q']
 def createworkingenviornment():
 	"""
 	This function will create workig enviornment for
-	other functions to work
+	other functions to work mainly
 	"""
 	if len(argv) > 1:
 		option = argv[-1]
