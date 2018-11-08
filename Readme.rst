@@ -92,7 +92,7 @@ Todo
 ----
 
  * A Wordpress Theme Support 
- * A Wordpress Plugin Support
+ * A Wordpress Plugin Support 
 
 How To issue
 ------------
