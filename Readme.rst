@@ -87,6 +87,10 @@ Development Process
 * Improve docs with your changes
 * Create a coverage report
 * Pull...
+  
+Todo:
+
+ * A Wordpress Theme Support 
 
 How To issue
 ------------
