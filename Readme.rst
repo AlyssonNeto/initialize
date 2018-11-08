@@ -4,8 +4,6 @@
 
 A Template Project Creator for python, html, css, Javascript
 
-Current Version Of Project is 0.0.1
-
 Benifits
 --------
 
@@ -64,14 +62,14 @@ Usage
 Contributing
 =============
 
-One Can Contribute to this project by **creating a issue at issue** at `https://github.com/{owner}/{repo}` Or **creating a pull request**
+One Can Contribute to this project by **creating a issue at issue** at `https://github.com/AngrySoilder/initialize` Or **creating a pull request**
 
 Pull Request Process
 --------------------
 
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a
    build.
-2. Checkout pull requests list at `https://github.com/{owner}/{repo}/pulls` to ensure that you are not dublicating anybody's work
+2. Checkout pull requests list at `https://github.com/AngrySoilder/initialize/pulls` to ensure that you are not dublicating anybody's work
 3. Update the README.md with details of changes to the interface, this includes new environment
    variables, exposed ports, useful file locations and container parameters.
 4. Increase the version numbers in any examples files and the README.md to the new version that this
