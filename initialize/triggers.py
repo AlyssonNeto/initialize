@@ -5,6 +5,7 @@ from initialize.mappers import (PYTHON_PROJ, WORDPRESS_THEME, HTCSJS, JSLIB, SHT
 from datetime import datetime
 from initialize._triggers import (readme_py, setup_py, gitignore_py, _index_html, readme,
 								  license, project_format, authors, editor_config)
+from initialize._license_template import license_dct, license_arr
 
 class Trigger(object):
 	"""
@@ -32,7 +33,9 @@ class Trigger(object):
 		"""
 		Ads Enviornment Variables
 		"""
-		license = _input("Select License Templates", default = 'MIT')
+		for idx, lic in enumerate(license_arr):
+			print(idx, lic)
+		license = _input("Select License Templates", default = 0)
 		year = _input("Enter Year", default=datetime.now().year)
 		author = _input("Enter Author Of Repo", allow_none = False)
 		quick_description = _input("Small Description")
@@ -116,7 +119,7 @@ class Shtml(Trigger):
 	"""A Simple Class Representing A shtml Trigger"""
 	def __init__(self, category):
 		super(Shtml, self).__init__(category)
-		self.add_trigger('index_html', _index_html)
+		self.add_trigger('index.html', _index_html)
 
 
 class Python(Trigger):
@@ -150,7 +153,7 @@ class Wp_Theme(Trigger):
 
 javascript 	= JavascriptTrigger('javascript')
 python 		= Python('python')
-html 		= Trigger('html')
+html 		= Shtml('html')
 shtml 		= Shtml('shtml')
 wp_theme 	= Wp_Theme('wp_theme')
 wp_plugin 	= Trigger('wp_plugin')

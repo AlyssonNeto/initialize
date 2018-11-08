@@ -74,6 +74,7 @@ def write_to_file(working_path, file, environment ,content):
     Summary
     """
     path = os.path.join(working_path,file)
+    print(path)
     if os.path.exists(path):
     	with open(path, 'w') as f:
     		f.write(content)

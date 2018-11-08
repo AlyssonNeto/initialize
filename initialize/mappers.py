@@ -80,7 +80,7 @@ JSLIB =['Authors',
 
 # Simple Html CSS JavaScript
 
-SHTML = ['inxex.html',
+SHTML = ['index.html',
 		 'Readme.md',
 		 'License',
 		 {'css':['index.css']},

@@ -3,7 +3,10 @@
 
 import os
 from initialize.utils import write_to_file, get_github_link
-from initialize._templates import PYTHON_INSTALLATION, Contributing
+from initialize._templates import (PYTHON_INSTALLATION, Contributing,
+	GITIGNORE_PY, INDEX_HTML, EditorConfig)
+from initialize._license_template import license_arr, license_dct
+
 
 def readme_py(working_path, file, environment, storage = ''):
 	"""
@@ -18,32 +21,30 @@ def readme_py(working_path, file, environment, storage = ''):
 	readme(working_path, file, environment, _storage)
 
 
-
-
 def setup_py(working_path, file, environment):
 	"""
 	Creating Custom Triggers For Setup.py file python
 	"""
 	pass
 
+
 def gitignore_py(working_path, file, environment):
 	"""
 	Hook for gitignore File
 	"""
-	pass
+	write_to_file(working_path, file, environment, GITIGNORE_PY)
+
 
 # Html Css Javascript Configurations
-
 def _index_html(working_path, file, environment):
 	"""
 	Index.html
 	"""
-	pass
+	write_to_file(working_path, file, environment, INDEX_HTML)
 
 
 # General Formatting Hooks
-
-def readme(working_path, file, environment, storage):
+def readme(working_path, file, environment, storage = ''):
 	"""
 	This is used to create simple readme file
 	"""
@@ -57,7 +58,14 @@ def license(working_path, file, environment):
 	"""
 	Hook for license
 	"""
-	pass
+	try:
+		license_int = int(environment['license'])
+	except ValueError:
+		license_int = 0
+
+	content = license_dct[license_arr[license_int]].format(year = environment['year'],author= environment['author'])
+	write_to_file(working_path, file, environment, content)
+
 
 def project_format(working_path, file, environment):
 	"""
@@ -65,14 +73,16 @@ def project_format(working_path, file, environment):
 	"""
 	pass
 
+
 def authors(working_path, file, environment):
 	"""
 	Hook For authors
 	"""
-	pass
+	write_to_file(working_path, file, environment, environment['author'])
+
 
 def editor_config(working_path, file, environment):
 	"""
 	For Editor Config Hook
 	"""
-	pass
+	write_to_file(working_path, file, environment, EditorConfig)
