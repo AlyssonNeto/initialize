@@ -56,7 +56,7 @@ def main(enviornment):
 	main_path = join(getcwd(),enviornment['project_name'])
 	option = enviornment['option']
 	tasks = {'javascript': JSLIB ,
-			 'python': PYTHON_PROJ ,
+			 'python': PYTHON_PROJ,
 			 'html' : HTCSJS,
 			 'wp_theme' : WORDPRESS_THEME ,
 			 'shtml': SHTML,
@@ -80,7 +80,7 @@ def _create_files(working_path, files_to_create,enviornment):
 		else:
 			printmessage("Creating File: " + file, enviornment)
 			# Processing With Filters
-			# HeadshorTriggers[enviornment['option']].process_filter(file)
+			file = HeadshorTriggers[enviornment['option']].process_filter(file, enviornment)
 			_createfile(working_path, file)
 			HeadshorTriggers[enviornment['option']].process_trigger(working_path, file, enviornment)
 
@@ -98,6 +98,7 @@ def _callback(current_path, dictionary, enviornment):
 	Used to callback create_files_in_dict folder
 	"""
 	working_path, files = _dct(dictionary)
+	working_path = HeadshorTriggers[enviornment['option']].process_filter(working_path, enviornment)
 	working_path = join(current_path, working_path)
 	printmessage("Going Inside Directory: " + working_path.split('/')[-1], enviornment)
 	_create_files(working_path, files, enviornment)

@@ -26,7 +26,7 @@ class Trigger(object):
 
 		# Adding custom filters
 		# A difference between filters they run on data not on enviornment
-		self.add_filter('format', project_format)
+		self.add_filter('{0}', project_format)
 
 	@staticmethod
 	def clis(enviornment):
@@ -92,12 +92,15 @@ class Trigger(object):
 			self._triggers[trigger](working_path, trigger, enviornment);
 
 
-	def process_filter(self, name):
+	def process_filter(self, name, enviornment):
 		"""
 		This is used to
 		"""
 		if name in self._filters:
-			self._filters[name]();
+			x = self._filters[name](name, enviornment)
+			return x
+		else:
+			return name
 
 
 	def remove_trigger(self, name):

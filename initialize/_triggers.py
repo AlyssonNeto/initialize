@@ -81,12 +81,12 @@ def license(working_path, file, environment):
 	content = license_dct[license_arr[license_int]].format(year = environment['year'],author= environment['author'])
 	write_to_file(working_path, file, environment, content)
 
-
-def project_format(working_path, file, environment):
+def project_format(file, environment):
 	"""
 	Project Naming Formatter
 	"""
-	pass
+	file = file.format(environment['project_name'])
+	return file
 
 
 def authors(working_path, file, environment):
