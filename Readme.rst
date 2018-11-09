@@ -8,9 +8,9 @@ Benifits
 --------
 
 * Auto Creation Of Standard Document Structure
-* Pre Initialised Git Repository(Not Implemented Yet)
-* Addition of Remote Repository After initialization(Not Added Yet)
-* Additon Of Tags From 0.1.0(Not Added Yet)
+* Pre Initialised Git Repository
+* Addition of Remote Repository After initialization
+* Additon Of Tags From 0.1.0
 * A Hour Start
   
 Installation
