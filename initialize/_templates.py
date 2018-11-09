@@ -294,6 +294,10 @@ dmypy.json
 
 SETUP_PY = """from setuptools import setup
 
+def readme():
+	with open('Readme.rst') as f:
+		return f.read()
+
 setup(
     name='{project_name}',
     version='{version}',
@@ -302,7 +306,19 @@ setup(
     license='{license}',
     author='{author}',
     author_email='{author_email}',
-    description='{description}'
+    description='{description}',
+    long_description=readme(),
+    classifiers=[
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3.6',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6'
+      ],
+    long_description_content_type='text/x-rst',
+    include_package_data=True,
+    zip_safe=False
 )"""
 
 
