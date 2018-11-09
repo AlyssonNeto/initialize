@@ -3,8 +3,9 @@ from initialize.utils import InvalidTrigger, _input, get_github_link
 from initialize.mappers import (PYTHON_PROJ, WORDPRESS_THEME, HTCSJS, JSLIB, SHTML,
 								WORDPRESS_PLUGIN)
 from datetime import datetime
-from initialize._triggers import (readme_py, setup_py, gitignore_py, _index_html, readme,
-								  license, project_format, authors, editor_config)
+from initialize._triggers import (readme_py, setup_py, gitignore_py, _index_html,
+								  readme, license, project_format, authors,
+								  editor_config, _style_css, plugin_php)
 from initialize._license_template import license_dct, license_arr
 
 class Trigger(object):
@@ -147,11 +148,57 @@ class Wp_Theme(Trigger):
 	"""A Wordpress Theme Trigger Accumulator"""
 	def __init__(self, category):
 		super(Wp_Theme, self).__init__(category)
+		self.add_trigger('style.css', _style_css)
 
 	@staticmethod
 	def clis(enviornment):
 		""" A cli enviornment Attachment"""
 		Trigger.clis(enviornment)
+		theme_name = _input("Enter Theme Name", allow_none=False)
+		theme_uri = _input("Enter Theme Url", default=enviornment['github_link'])
+		author_url = _input("Enter Author Url", default=enviornment['github_link'])
+		tags = _input("Enter Tags Comma Seperated")
+		text_domain = _input("Enter Text Domain", allow_none=False)
+
+		# Registering Enviornment
+		enviornment['theme_name'] = theme_name
+		enviornment['theme_uri'] = theme_uri
+		enviornment['author_url'] = author_url
+		enviornment['tags'] = tags
+		enviornment['text_domain'] = text_domain
+
+class Wp_Plugin(Trigger):
+	"""
+	Trigger
+	"""
+	def __init__(self, category):
+		super(Wp_Plugin, self).__init__(category)
+		self.add_filter('{0}.php', project_format)
+
+	def process_filter(self, name, enviornment):
+		"""
+		Here Function is Re-implemented
+		"""
+		if name == '{0}.php':
+			trg = name.format(enviornment['project_name'])
+			self.add_trigger(trg, plugin_php)
+
+		x = super(Wp_Plugin,self).process_filter(name, enviornment)
+		return x
+
+	@staticmethod
+	def clis(enviornment):
+		Trigger.clis(enviornment)
+		plugin_name = _input("Enter Plugin Name", allow_none=False)
+		plugin_uri = _input("Enter Plugin Url", default=enviornment['github_link'])
+		author_url = _input("Enter Author Url", default=enviornment['github_link'])
+		text_domain = _input("Enter Text Domain", allow_none=False)
+
+		# Registering Enviornment
+		enviornment['plugin_name'] = plugin_name
+		enviornment['plugin_uri'] = plugin_uri
+		enviornment['author_url'] = author_url
+		enviornment['text_domain'] = text_domain
 
 
 javascript 	= JavascriptTrigger('javascript')
@@ -159,7 +206,7 @@ python 		= Python('python')
 html 		= Shtml('html')
 shtml 		= Shtml('shtml')
 wp_theme 	= Wp_Theme('wp_theme')
-wp_plugin 	= Trigger('wp_plugin')
+wp_plugin 	= Wp_Plugin('wp_plugin')
 
 
 HeadshorTriggers = {'javascript': javascript ,

@@ -11,8 +11,9 @@ from initialize.utils import InvalidTrigger, printusage, printmessage, _input
 from initialize.triggers import Trigger, HeadshorTriggers
 from initialize.mappers import (PYTHON_PROJ, WORDPRESS_THEME, HTCSJS, JSLIB, SHTML,
 								WORDPRESS_PLUGIN)
+from subprocess import call
 # main options
-standard_main_options = ['javascript', 'python' , 'html', 'ws_theme', 'shtml', 'wp_plugin']
+standard_main_options = ['javascript', 'python' , 'html', 'wp_theme', 'shtml', 'wp_plugin']
 standard_sub_options = ['-q']
 
 def createworkingenviornment():
@@ -65,6 +66,16 @@ def main(enviornment):
 	enviornment['main_path'] = main_path
 	enviornment['tasks'] = tasks
 	_create_files(main_path, tasks[option],enviornment)
+	os.chdir(main_path)
+	file = open('x.tmp','w')
+	call(['git','init'], stdout = file)
+	call(['git','add','*'])
+	call(['git','commit','-m',"initial commit"], stdout = file)
+	call(['git','tag','0.1.0'])
+	call(['git','branch','dev'])
+	call(['git','branch','docs'])
+	file.close()
+	os.remove('x.tmp')
 
 
 def _create_files(working_path, files_to_create,enviornment):
@@ -78,9 +89,9 @@ def _create_files(working_path, files_to_create,enviornment):
 		if isinstance(file, dict):
 			_callback(working_path, file, enviornment)
 		else:
-			printmessage("Creating File: " + file, enviornment)
 			# Processing With Filters
 			file = HeadshorTriggers[enviornment['option']].process_filter(file, enviornment)
+			printmessage("Creating File: " + file, enviornment)
 			_createfile(working_path, file)
 			HeadshorTriggers[enviornment['option']].process_trigger(working_path, file, enviornment)
 

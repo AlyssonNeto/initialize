@@ -91,8 +91,8 @@ def plugin_php(working_path, file ,environment):
 	except ValueError:
 		license_int = 0
 	license = license_arr[license_int]
-	content = Wp_Theme_Header.format(theme_name=environment['theme_name'],
-									 theme_uri=environment['github_link'] ,
+	content = Wp_Plugin_Header.format(theme_name=environment['plugin_name'],
+									 theme_uri=environment['plugin_uri'] ,
 									 author=environment['author'],
 									 author_uri=environment['github_link'],
 									 description=environment['desc'] ,
@@ -102,6 +102,7 @@ def plugin_php(working_path, file ,environment):
 									 )
 	lic_content = license_dct[license].format(year = environment['year'],
 											  author = environment['author'])
+
 	lic_content = Wp_license.format(lic_content)
 	content = content + lic_content
 	write_to_file(working_path, file, environment, content)

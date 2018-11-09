@@ -43,9 +43,15 @@ Or install the latest build from an `archive`_. ::
 
 """
 
+Readme_Header = """# {readme_header}
+{readme_text}
+
+"""
 
 
-Contributing = """Contributing
+
+Contributing = """
+Contributing
 =============
 
 One Can Contribute to this project by **creating a issue at issue** at `{github_link}` Or **creating a pull request**
@@ -298,5 +304,38 @@ setup(
     author_email='{author_email}',
     description='{description}'
 )"""
+
+
+# Specific for wordpress
+Wp_Theme_Header = """/*
+Theme Name: {theme_name}
+Theme URI: {theme_uri}
+Author: {author}
+Author URI: {author_uri}
+Description: {description}
+Version: {version}
+License: {license}
+Text Domain: {text_domain}
+Tags:{tags}
+*/"""
+
+# These Are For Plugin
+
+Wp_Plugin_Header = """<?php
+/*
+Plugin Name:  {theme_name}
+Plugin URI:   {theme_uri}
+Description:  {description}
+Version:      {version}
+Author:       {author}
+Author URI:   {author_uri}
+License:      {license}
+Text Domain:  {text_domain}
+Domain Path:  /languages
+*/
+
+"""
+
+Wp_license = "/*{0}*/"
 
 
